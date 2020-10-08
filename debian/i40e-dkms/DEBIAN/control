@@ -1,0 +1,11 @@
+Package: i40e-dkms
+Source: i40e
+Version: 2.13.10
+Architecture: all
+Maintainer: Damjan Marion <dmarion@me.com>
+Installed-Size: 2769
+Depends: dkms (>= 2.1.0.0)
+Section: net
+Priority: optional
+Description: Intel i40e adapter driver
+ This package contains Linux kernel driver for Intel Fortville

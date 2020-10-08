@@ -1,0 +1,456 @@
+i40e (2.13.10) unstable; urgency=medium
+
+  * Add PTP support for respective XXV710-DA2T cards
+  * Add S/W DCB support 
+  * Add FlowDirector support for IPv6
+  * Add flow for IPv6 next header
+  * Add EEE LPI status check for X722 adapters
+  * Add meta pointer for direct access for bpf
+  * Add default VLAN filter setting to 0
+  * Add error message when MTU on device is out of the range
+  * Add supported coalescing parameters
+  * Fix rtnl lock issue
+  * Fix erroneous adapter reinitialization during recovery process
+  * Fix page counting for XDP_REDIRECT
+  * Fix rebuild VSI when XDP is ON and FW LLDP agent OFF
+  * Fix virtchnl_queue_select bitmap validation
+  * Fix spinlock not released if error while adding MAC to list
+  * Fix PHY configuration parameters when enabling EEE
+  * Fix removing driver while bare-metal VFs pass traffic
+  * Fix for link-flapping
+  * Fix MAC address setting for a VF via Host/VM
+  * Fix only MACs from host must be preserved
+  * Fix for correct max_pkt_size on VF RX queue
+  * Fix TC QDISC MQPRIO
+  * Fix queue-to-TC mapping on tx
+  * Fix reporting VLAN capability flag to VF
+  * Fix changing allow_untagged setting with PVID
+  * Fix flow bifurcation support
+  * Fix compilation issue on modern OSes and other minor bug fixes
+  
+ -- Ali KIZIL <ali@kizil.com>  Tue, 08 Oct 2020 11:01:40 +0400
+
+i40e (2.12.6) unstable; urgency=medium
+
+  * Add supported coalescing parameters for kernels >= 5.7.0
+  * Add err message when there is not enough space for vlan mirrors
+  * Add messgage when EMP reset occurs
+  * Add changing RS-Fec on FPK Backplane
+  * Add allow any queue in cloud filter addition
+  * Add return -ENOPKG when DDP package is not correct
+  * Add fourth part of driver version as subbuild
+  * Add VF-D allow_bcast parameter support
+  * Add VF-D queue_type parameter support
+  * Add check for queue allocation for the VF
+  * Add support for custom cloud filters for tunneled and non-tunneled packets
+  * Add reject cloud filters that don't set bit 62
+  * Del RSS hash key in case of decreasing queue amount only if hash is default
+  * Fix MAC address setting for a VF via Host/VM
+  * Fix clearing sriov/mac_list on VF removal
+  * Fix settings of RS-FEC and BaseR on FPK
+  * Fix possibility of integer overflow
+  * Fix issue when vlan 0 is added by VF
+  * Fix ATR CPU locality after turning ntuple off
+  * Fix the "ethtool -m" output for adapters without SFP cage
+  * Fix queue count in tcs
+  * Fix the limit more MACs are added than displayed
+  * Fix restore VF MSI-X state during PCI reset
+  * Fix issue when maximum queues is exceeded
+  * Fix lear vf status when iavf driver is being unloaded
+  * Fix wrong GFP flag in spin_lock section
+  * Fix and improvements to outer IP filters
+  * Fix mac_list is restored after iavf driver reset/reload
+  * Fix limit of MacVlan resources for every trusted VF
+  * Fix for sync VF driver reset
+  * Fix for failed to init adminq while VF reset
+  * Fix incorrect code in flow director implementation
+  * Fix failed opcode appearing if handling messages from VF
+  * Fix compilation issue on modern OSes and other minor bug fixes
+
+ -- Damjan Marion <dmarion@me.com>  Tue, 08 Sep 2020 12:35:40 +0200
+
+i40e (2.11.29) unstable; urgency=medium
+
+  * Add PTP pins support for cards that support 1PPS output
+  * Add backward compatibility for link_speed report for iavf
+  * Del mac/vlan anti spoof in sysfs
+  * Del vlan_anti_spoof from spoofchk setting
+  * Fix restrict PTP PIN settings to PF 0
+  * Fix disable non-standard PTP pin sysfs interface for new kernels
+  * Fix scheduling while atomic possiblity
+  * Fix adding MAC filters when VLANs are added
+  * Fix warning message during remove iavf driver
+  * Fix issue while removing VFs
+  * Fix issue during rmmod i40e driver
+  * Fix check for invalid OEM firmware pointer
+  * Fix trunk after sync VLAN sysfs and netdev ops
+  * Fix tc mapping on real_num_tx_queues change
+  * Fix setting PVID in trunk
+  * Fix issue on VSI filter sync
+  * Fix - prevent VLAN restore on KVM destroy
+  * Fix allow_untagged to off, after trunk add
+  * Fix unload a driver when it is in pre-recovery mode
+  * Fix syncronization ip link show and sysfs
+  * Fix Invalid VF Identifier error in dmesg
+  * Fix combined issue after tc qdisc was failed
+  * Fix compilation issue on modern OSes and other minor bug fixes
+
+ -- Damjan Marion <dmarion@me.com>  Thu, 14 May 2020 21:28:26 +0200
+
+i40e (2.11.25) unstable; urgency=medium
+
+  * Deprecated VF's mac/vlan anti spoof feature control in PF's sysfs
+  * Fix synchronization of VLAN configuration between netdev ops and sysfs
+  * Add removal of VF's VLAN when associated VM is destroyed
+
+ -- Damjan Marion <dmarion@me.com>  Fri, 27 Mar 2020 13:18:04 +0100
+
+i40e (2.11.21) unstable; urgency=medium
+
+  * Fix minimized amount of busy-waiting during AQ send on Linux
+  * Fix compilation issue on latest 5.5.x kernels
+  * Fix sysfs for VF promiscuous mode
+  * Fix link speed reported after dis/en VF via link_state
+  * Fix proper loopback value after iavf driver reload
+  * Fix default value of allow_untagged flag to true
+  * Fix removal of PF to VF mirror rules
+  * Fix displaying queue statistics shown by ethtool
+  * Fix reload VF driver after configured vlan if trunk was set
+  * Fix get/set trunk when port VLAN is enabled
+  * Fix link up/down procedure
+  * Fix printing of actual link speed for 2.5 and 5 Gbps
+  * Fix VF failed during set MAC on VF with set mirroring
+  * Fix check mirror configuration
+  * Fix opcode msg on unsuccessful VF MAC change
+  * Fix incorrect flags for egress mirror
+  * Fix general protection fault during remove VLAN from VF
+  * Fix wrong error OK message during remove VF
+  * Fix restore mirror config after iavf reload
+  * Fix VF failed during changing MAC on VF with VLAN mirror
+  * Fix PF wait reset loop, make it more reliable
+  * Fix VF to VF ingress/egress mirroring
+  * Fix defect with adding/deleting ingress/egress mirror
+  * Fix for reading lpi duration statistics from FW
+  * Fix compilation under RHEL 8.1
+  * Add support for UDP source cloud filters
+  * Add preliminary VF-D 1.5 specification support
+  * Add of sysfs for max_tx_rate
+  * Add build time choise of pf->vf speed reporting protocol
+  * Add log entry when a NIC enters recovery mode after reboot
+  * Add Enable/Disable DCB on X710-T*L
+  * Add support F/W API version up to 1.10
+  * Add missing 0 length checks to a couple RSS opcodes
+  * Add missing AQ command buffer for sriov/loopback setup
+  * Add error handling to the i40e_set_vf_port_vlan function
+  * Add omit TC creation if first queue is not power of two
+  * Add support for text sending error msg during adding filter for VF
+  * Add MSI-X checks during creating tc queue maps
+
+ -- Damjan Marion <damarion@me.com>  Tue, 17 Mar 2020 13:00:23 +0100
+
+i40e (2.10.19.82) unstable; urgency=medium
+
+  * Fix DCP enable/disable handling for 2.5Gbps & 5Gbps speeds
+  * Fix general protection fault during remove vlan from vf
+  * Fix for ethtool -m issue on X722 NIC
+  * Fix logging speed 2.5Gbps & 5Gbps in VF link message
+  * Fix support for logging EEE status in RHEL6.10
+  * Fix unsupported ethtool EEE parameters handling
+  * Fix error when iavf is reloaded
+  * Fix log on failed attempt to add vf mirror
+  * Fix driver compilation on kernel 5.2+ without CONFIG_DCB
+  * Add statistics for lpi duration for EEE supported cards
+  * Add EEE log info when link is up
+  * Add log TC creation failure when max num of queues is exceeded
+  * And some minor bugfixes
+
+ -- Damjan Marion <damarion@me.com>  Sun, 9 Feb 2020 18:20:43 +0100
+
+i40e (2.10.19.30) unstable; urgency=medium
+
+  * Fix ingress/egress mirroring issues
+  * Fix VF spawning on servers with ncpu >= 192
+  * Fix recofery mode detection
+  * Fix ethtool to report SW and FW versions in recovery mode
+  * Fix reset in recovery mode
+  * Fix updating OROM when a NIC is in recovery mode
+  * Fix FEC mode flag after reset
+  * Fix mirroring seid mixup
+  * Fix FWLLDP status reading on driver loading   
+  * Fix crash caused by stress setting of VF MAC addresses
+  * Fix HW_PERF build when HAVE_XDP_SUPPORT is defined
+  * Removed VF RDMA code from PF driver
+  * Add support for RHEL8.1
+  * Add reading EEE LPI statistics for X710-T*L cards ethtool --show-eee
+  * Add registration RDMA client devices to the virtual platform bus
+  * Add log when PF is entering and leaving Allmulti mode
+  * Add log missed "Negotiated" string in i40e_print_link_message()
+  * And some minor compilation issues fixes
+
+ -- James Fette <jfette@gmail.com>  Mon, 06 Jan 2020 11:27:22 +0400
+
+i40e (2.9.21) unstable; urgency=medium
+
+  * Fix update visual effect for advertised FEC mode
+  * Fix vf hotplug into vm
+  * Fix don't report link up for a VF who hasn't enabled queues
+  * Fix incorrect ethtool statistics veb and veb.tc_
+  * Fix descriptor count manipulation via 'ethtool -G'
+  * Add loging disable-fw-lldp flag change by ethtool
+  * Add make visible changed vf mac on host 'ip link show $pf'
+  * Add log entry while creating or deleting TC0
+  * And some minor internal code refactorings
+
+ -- Damjan Marion <damarion@me.com>  Tue, 14 Jun 2019 20:35:41 +0100
+
+i40e (2.8.43) unstable; urgency=medium
+
+  * EOL Itanium support
+  * Added support for persistent F/W LLDP feature
+  * Added support for 2.5G/5G speeds for some cards
+  * Added support for EEE ethtool --set-eee  $pf eee off/on for some cards
+  * Added ability to change vf mac address from host by ip command
+  * Added ability for untrusted VF to create up to 16 VLANs
+  * Added ability for untrusted VF to add 16 multicast filter
+  * Added support for few new cards
+  * Many minor bug fixes, code hardening and logging enhancements
+
+ -- Damjan Marion <damarion@me.com>  Tue, 14 Jun 2019 20:30:22 +0100
+
+i40e (2.7.29) unstable; urgency=medium
+
+  * update README
+
+ -- Damjan Marion <damarion@me.com>  Tue, 14 Jun 2019 20:20:43 +0100
+
+i40e (2.7.26) unstable; urgency=medium
+
+  * Dynamic Device Personalization (DDP) profile upload feature implemented
+
+ -- Damjan Marion <damarion@me.com>  Tue, 18 Dec 2018 10:11:01 +0100
+
+i40e (2.7.12) unstable; urgency=medium
+
+  * Fix issue with link-down-on-close private flag feature
+
+ -- Damjan Marion <damarion@me.com>  Tue, 06 Nov 2018 17:57:05 +0100
+
+i40e (2.7.11) unstable; urgency=medium
+
+  * Implement ADq feature
+  * Add support for configuring VFs through sysfs
+  * Add XDP support
+  * Add support Forward Error Correction (FEC) on 25G links
+  * Allow disabling FW LLDP (requires updated firmware)
+  * Fix bug where link could be forced down after MTU change
+  * Add support for new kernel APIs
+  * Fix WARN_ON() if MSI-X not available
+  * Fix issue with lost link when forcing link mode on some adapters
+  * Add support to allow the FW update tool to upgrade/downgrade from any FW
+    version to any other FW version
+    Note: this may require a power cycle as an intermediate step.
+  * Fix kernel panic with repeated quick enable/disable of VFs
+  * Fix possible TX timeout with DCB on some kernels
+  * Re-enable TSO after MTU change
+  * Fix potential panic on shutdown with many MSI-X vectors
+  * Add VEB stats to ethtool
+  * Fix panic on suspend with RDMA client driver active
+  * Fix timing issue with assigning VFs to VMs using virsh
+  * Restore TCPv4 input set when re-enabling ATR
+  * Performance fixes with Adaptive ITR
+  * Code cleanups
+  * Minor bug fixes
+  * Add support for RHEL 7.5
+  * Add support for SLES12SP3
+
+ -- Damjan Marion <dmarion@me.com>  Tue, 06 Nov 2018 17:55:04 +0100
+
+i40e (2.4.10) unstable; urgency=medium
+
+  * Add support for RHEL 7.5
+  * Fix synchronization issue with simultaneous resets on multiple ports
+
+ -- Damjan Marion <dmarion@me.com>  Wed, 13 Jun 2018 00:00:01 +0200
+
+i40e (2.4.6) unstable; urgency=medium
+
+  * fix unnecessary PF resets issue
+  * update Flow Director User documentation
+  * fix compilation error on RHEL-7.5
+  * fix compilation error on kernel 4.15.1
+
+ -- Damjan Marion <dmarion@me.com>  Sat, 10 Mar 2018 00:00:01 +0200
+
+i40e (2.4.3) unstable; urgency=medium
+
+  * fix issue on X722 with netdev close removing RDMA instance
+  * performance updates
+  * fix some issues with link reporting
+  * fix issue with tx timeouts on systems with > 128 cores
+  * fix issue with promiscuous mode disappearing across resets
+  * fix issue with flow director filters not working on fragmented IPv4
+  * fix issue with duplicate flow director filters not being updated to HW
+
+ -- Damjan Marion <dmarion@me.com>  Fri, 15 Dec 2017 00:00:01 +0200
+
+i40e (2.3.6) unstable; urgency=medium
+
+  * Fix mac filter removal timing issue
+  * Sync i40e_ethtool.c with upstream
+  * Fixes for TX hangs
+  * Some fixes for reset of VFs
+  * Fix build error with packet split disabled
+  * Fix memory leak related to filter programming status
+  * Add and modify branding strings
+  * Fix kdump failure
+  * Implement an ethtool private flag to stop LLDP in FW
+  * Add delay after EMP reset for firmware to recover
+  * Fix incorrect default ITR values on driver load
+  * Fixes for programming cloud filters
+  * Some performance improvements
+  * Enable XPS with QoS on newer kernels
+  * Enable support for VF VLAN tag stripping control
+  * Build fixes to force perl to load specific ./SpecSetup.pm file
+  * Fix the updating of pci.ids
+  * Use 16 byte descriptors by default
+  * Fixes for DCB
+  * Don't close client in debug mode
+  * Add change MTU log in VF driver
+  * Fix for adding multiple ethtool filters on the same location
+  * Add new branding strings for OCP XXV710 devices
+  * Remove X722 Support for Destination IP Cloud Filter
+  * Allow turning off offloads when the VF has VLAN set
+
+ -- Damjan Marion <dmarion@me.com>  Fri, 15 Dec 2017 00:00:00 +0200
+
+i40e (2.1.26) unstable; urgency=medium
+
+  * Enable VF trust on RHEL 7.3
+  * Add support for Adaptive Virtual Function
+  * Fixes for ITR, link modes, queue and vector allocations
+  * Add support for VF to get more queues
+  * Enable PTP L4 capabilities for XL710 if FW >6.0
+  * Refactor of VF reset flow and feature flags
+  * Fixes for performance enhancements and latency reduction
+  * Do not enable NAPI on q_vectors without queues
+  * Fix-up GRE workaround for kernels prior to 4.6
+  * Add support for min/max MTU
+  * Add legacy-rx private flag to allow fallback to old Rx flow
+  * Add support for using order 1 pages with a 3K buffer
+  * Add support for padding start of frames
+  * Spread CPU affinity hints across online CPUs only
+  * Add support for 'ethtool -m'
+  * Add support for 25G in ethtool
+  * Enable UDP tunnels correctly
+  * Allow enabling VxLAN tunnels on XL710 devices
+  * Remove broken flexbyte ntuple flow director filter support
+  * Fixes for Ntuple filter and suspend/hibernation mode
+  * Rework cloud filter use of user defined data
+  * Add support for SCTPv4 FDir filters
+  * Remove ULTRA latency mode
+  * Enable support for VF VLAN tag stripping control
+  * Support for link_down_on_close private flag
+  * 25G FEC status improvements
+  * Fixes for the client interface, NVM update and TX checksum offloads for
+    VxLAN
+  * Adjust packet size to account for double VLANs
+  * Add private flag to control source pruning
+  * Add capability exchange for outer checksum
+  * Add (Q)SFP module memory access definitions
+  * Add AQ commands for Dynamic Device Personalization(DDP) and extend
+    processing of DDP
+  * Define big buffer for extended fields in Add/Remove Cloud filters command
+  * Add new phy types for 25G AOC and ACC support.
+  * Update FW AQ API version to 1.7
+  * Add ENCAP and RX_ENCAP_CSUM VF offload flags
+  * EEPROM Checksum verification fix
+  * Add support for new switch parameters
+  * Add capability macros for 25G AOC/ACC
+  * Backports from upstream
+
+ -- Damjan Marion <dmarion@me.com>  Wed, 13 Sep 2017 00:00:00 +0200
+
+i40e (2.0.26) unstable; urgency=medium
+
+  * Add an extra 4 bytes to the packet size calculations to account for double
+    VLAN tags inserted by upper layers (e.g. bonding or bridging). Note that
+    the driver does not currently support direct insertion and stripping of
+    double tags, but it will now pass them correctly.
+  * Add new ethtool private flag "link-down-on-close" that controls
+    whether or not link is forced down when the interface is closed. By default, link
+    stays up at all times. Note: If the link is disabled and the system is
+    rebooted,Intel PreBoot and Diagnostics tools will be unable enable
+    the link. Support for this functionality will be enabled in a later
+    release of the preboot software.
+
+ -- Damjan Marion <dmarion@me.com>  Wed, 24 May 2016 18:55:46 +0200
+
+i40e (1.5.18) unstable; urgency=medium
+
+  * Fix PCIe error on system hibernate
+  * Include additional fix for TSO from Alex Duyck's upstream patch
+
+ -- Damjan Marion <dmarion@me.com>  Fri, 29 Apr 2016 18:55:46 +0200
+
+i40e (1.5.16) unstable; urgency=medium
+
+  * Add support for IPv4 encapsulated in IPv6
+  * Add support for ATR w/ IPv6 extension headers
+  * Allow up to 12K bytes of data per Tx descriptor instead of 8K
+  * Add geneve tunnel offload support
+  * Add VF promiscuous mode support
+  * Add support for new 10GBaseT PHY's
+  * Allow RSS Hash set with less than four parameters
+  * Timestamp bug fixes
+  * Add support for new kernels
+  * Fix compile issues on old kernels
+  * Add new option to irq affinity script
+  * Disable driver FCoE support
+  * Add support for flexibility in tuples used for ntuple rules
+  * Enable RSS for TCP6/UDP6
+  * Add support for flex bytes in flow director filter
+  * Add filters to support VSI selection based on L3 and tunnel parameters
+  * New device support
+  * Disable link polling
+
+ -- Damjan Marion <dmarion@me.com>  Fri, 29 Apr 2016 18:55:16 +0200
+
+i40e (1.4.25) unstable; urgency=medium
+
+  * Removed use of configfs
+  * Add support for new devices
+  * Change driver startup string to be more generic
+  * Bump adminq version
+  * Add 20G speed for TX bandwidth calculation for VFs
+  * Enable VF spoof checking on older kernels
+  * Fix bonding with more than one VF
+  * Fix DCBNL compile on 3.0 and older kernels
+  * Preserve flow control settings over resets
+  * RX improvements, specifically when IOMMU is enabled
+  * Fix promiscuous mode to respect exact match filter rules
+
+ -- Damjan Marion <dmarion@me.com>  Sat, 06 Feb 2016 18:59:18 +0100
+
+i40e (1.3.49) unstable; urgency=medium
+
+  * Fix bug in VSI filter sync function that was causing unexpected resets
+  * Clean descriptor before use in NVM update
+
+ -- Damjan Marion <dmarion@me.com>  Mon, 23 Jan 2016 10:51:34 +0100
+
+i40e (1.3.47) unstable; urgency=medium
+
+  * Fix bug where driver deadlocks when adding/removing vlan over bond
+
+ -- Damjan Marion <dmarion@me.com>  Mon, 23 Nov 2015 00:54:24 +0100
+
+i40e (1.3.46) unstable; urgency=medium
+
+  * Default to VEPA bridge mode
+  * Prevent VFs from sending flow control frames
+  * Make the flow control status after a PF reset more consistent
+  * Fix a compile problem on RHEL 7.2
+  * Fix using a VLAN inside VXLAN
+  * Fix an IRQ Safe->IRQ Unsafe warning
+
+ -- Damjan Marion <dmarion@me.com>  Sun, 22 Nov 2015 21:02:03 +0100
